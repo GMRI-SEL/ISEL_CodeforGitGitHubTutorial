@@ -10,7 +10,7 @@
 # Data prep and exploration -----------------------------------------------
 
 ## Data prep using preloaded "trees" dataset in R.  As a clean dataset, there really isn't much prep other than loading in the dataset and checking out its structure.
-
+#an edit
 # Load it in
 data(trees) #Trees are green
 
@@ -57,7 +57,7 @@ plot_grid(girth.hist, height.hist, vol.hist, labels = c("Girth", "Height", "Volu
 
 # Covariation plot
 ggpairs(trees)
-
+#another edit 
 
 # Data modeling: linear regression ----------------------------------------
 
