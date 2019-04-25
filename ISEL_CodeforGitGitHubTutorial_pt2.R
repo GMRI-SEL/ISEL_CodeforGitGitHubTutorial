@@ -1,7 +1,3 @@
-######### aHHHHHHHHHHHH
-
-#### will this break the system????
-
 # GMRI Integrated Systems Ecology Lab: Git, GitHub and You example code
 #make a commit from Lindsay
 #####
@@ -43,7 +39,7 @@ library_check<- function(libraries) {
   ## End function
 }
 
-library_check(c("tidyverse", "cowplot", "GGally", "plotly"))
+library_check(c("tidyverse", "cowplot", "GGally", "plotly", "broom"))
 
 # Hopefully that all worked okay. A billion different ways to visualize these data, so just a few here...
 # Variable histogram plots
@@ -117,4 +113,18 @@ plot_ly(data = pred.grid, z = ~Pred.Volume, x = ~Girth, y = ~Height, opacity = 0
   add_markers(data = trees, z = ~Volume, x = ~Girth, y = ~Height, marker = list(color = "green", size = 4), name = "Observed changed color")
 
 
-### Andrew did this11!!
+# Interaction model -------------------------------------------------------
+# AJA Notes 4/25: Looked like there might be an interaction going on between height and girth. Giving that a shot and then looking at the model comparisons. 
+# Data modeling: linear regression using both girth and height and interaction 
+# Fit the model
+girth.height.int.mod<- lm(Volume ~ Girth + Height + Girth*Height, data = trees)
+
+# Diagnostics
+plot(girth.height.int.mod)
+
+# Inferences and evaluation
+summary(girth.height.int.mod)
+
+# Comparison -- definitely better way to do this, but for now:
+mod.comp<- data.frame("Model" = c("Girth", "Girth+Height", "Girth+Height+Int"), bind_rows(glance(girth.mod), glance(girth.height.mod), glance(girth.height.int.mod)))
+mod.comp
